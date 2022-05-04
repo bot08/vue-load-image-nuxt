@@ -23,17 +23,21 @@ export default {
     }
   },
   created() {
-    const imageElement = this.getImgElementFromImageSlot()
-    if (imageElement == null) {
-      return
-    }
-    this.src = imageElement.props.src || imageElement.props['data-src']
-    if (this.src) {
-      this.status = Status.LOADING
-      this.crossOrigin = imageElement.props.crossorigin
-      this.createLoader()
+    if(process.client) {
+      const imageElement = this.getImgElementFromImageSlot()
+      if (imageElement == null) {
+        return
+      }
+      this.src = imageElement.props.src || imageElement.props['data-src']
+      if (this.src) {
+        this.status = Status.LOADING
+        this.crossOrigin = imageElement.props.crossorigin
+        this.createLoader()
+      } else {
+        this.status = Status.PENDING
+      }
     } else {
-      this.status = Status.PENDING
+      this.status = Status.LOADING
     }
   },
   updated() {
