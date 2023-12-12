@@ -39,6 +39,33 @@ export default {
     } else {
       this.status = Status.LOADING
     }
+
+    // Sketch (not tested)
+    /*
+    if(process.client){
+      if (document.readyState === "complete") {
+        const imageElement = this.getImgElementFromImageSlot()
+        if (imageElement == null) {
+          return
+        }
+        this.src = imageElement.props.src || imageElement.props['data-src']
+        if (this.src) {
+          this.status = Status.LOADING
+          this.crossOrigin = imageElement.props.crossorigin
+          this.createLoader()
+        } else {
+          this.status = Status.PENDING
+        }
+      }
+      else {
+        this.status = Status.LOADED
+      }
+    } 
+    else {
+      this.status = Status.LOADED
+    }
+    */
+    
   },
   updated() {
     const imageElement = this.getImgElementFromImageSlot()
